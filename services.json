@@ -1,0 +1,18 @@
+[
+  {
+    "icon": "images/icon-graphic.png",
+    "title": "Graphic Designing",
+    "desc": "We create eye-catching designs for your brand including social media posts, flyers, posters, business cards, brochures, and complete brand kits. Our focus is to give your brand a modern and creative visual identity that stands out in the market."
+  },
+  {
+    "icon": "images/icon-video.png",
+    "title": "Video Editing",
+    "desc": "We edit professional videos for YouTube, Instagram, Reels, ads, and promotional content. We focus on clean cuts, smooth transitions, modern effects, and premium visuals."
+  },
+  {
+    "icon": "images/icon-web.png",
+    "title": "Website Development",
+    "desc": "Clean, responsive, SEO‑friendly websites for personal brands & businesses."
+  }
+  // add more objects as needed
+]
