@@ -1,70 +1,237 @@
-* { margin:0; padding:0; box-sizing:border-box; }
+/* =============================
+   Font Imports & Global Reset
+============================= */
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC&family=Neuton&family=ABeeZee&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background:#0a0a0a;
-  color:#eee;
-  font-family:sans-serif;
-  line‑height:1.6;
+  background: #f4f4f4;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
 }
-header { text-align:center; padding:4rem 1rem; }
-header h1 { font-size:3rem; color:#0ff; }
-header .tagline { font-size:1.3rem; color:#f0f; margin-bottom:1rem; }
-nav a {
-  margin:0 0.5rem;
-  color:#0ff;
-  text-decoration:none;
-  transition: color 0.3s;
+
+/* =============================
+   Headings with | animation
+============================= */
+.fancy-heading {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 32px;
+  position: relative;
+  padding-left: 40px;
+  display: inline-block;
+  color: #000;
 }
-nav a:hover { color:#f0f; }
-section { padding:3rem 1rem; max-width:900px; margin:0 auto; }
-h2 { font-size:2rem; color:#0ff; margin-bottom:1rem; text-align:center; }
-.service-group { margin-bottom:2rem; }
-.service-group h3 { font-size:1.4rem; color:#f0f; margin-bottom:0.5rem; }
-.service-group ul { list-style: none; }
-.service-group li {
-  padding:0.3rem 0;
-  border-left:3px solid #0ff;
-  margin:0.3rem 0;
-  transition: border-color 0.3s;
+
+.fancy-heading::before {
+  content: '|';
+  font-size: 34px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #7b0091;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: transform 1s ease, opacity 0.8s ease;
 }
-.service-group li:hover { border-color:#f0f; }
-.features { display:flex; flex-wrap:wrap; gap:1rem; margin:1rem 0; }
-.features li {
-  background:#111;
-  padding:0.8rem 1rem;
-  border:2px solid #0ff;
-  border-radius:5px;
-  flex:1 1 calc(50% - 1rem);
+
+.fancy-heading.visible::before {
+  opacity: 1;
+  transform: translateX(0);
 }
-.stats { display:flex; gap:2rem; justify-content:center; margin:2rem 0; }
-.stats div { text-align:center; }
-.stats h3 { font-size:2.2rem; color:#f0f; }
-.journey p { margin:0.5rem 0; }
-form {
-  display:flex;
-  flex-direction:column;
-  gap:1rem;
-  max-width:400px;
-  margin:1rem auto;
+
+.fancy-line {
+  height: 4px;
+  width: 50px;
+  background: #7b0091;
+  margin: 12px 0 30px 0;
 }
-input, textarea {
-  padding:0.8rem;
-  border:2px solid #0ff;
-  border-radius:5px;
-  background:#111;
-  color:#eee;
+
+/* =============================
+   Services Carousel
+============================= */
+.services-carousel {
+  position: relative;
+  height: 360px;
+  max-width: 1100px;
+  margin: auto;
+  perspective: 1200px;
+  overflow: visible;
 }
-button {
-  padding:0.8rem;
-  border:none;
-  background:#f0f;
-  color:#111;
-  cursor:pointer;
-  font-weight:bold;
-  transition: transform 0.2s;
+
+.service-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  width: 280px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -140px;
+  transform-style: preserve-3d;
+  transition: all 0.6s ease-in-out;
+  font-family: 'ABeeZee', sans-serif;
+  cursor: pointer;
+  opacity: 0;
 }
-button:hover { transform: scale(1.05); }
-footer { text-align:center; padding:2rem 1rem; font-size:0.9rem; color:#666; }
-@media (max-width:600px) {
-  .features { flex-direction:column; }
-  .stats { flex-direction:column; }
+
+.service-card.active {
+  opacity: 1;
+  z-index: 3;
+  transform: translateX(0) scale(1.05) rotateY(0);
+  box-shadow: 0 0 25px rgba(255, 195, 0, 0.9);
+  background: #fff;
+}
+
+.service-card.left {
+  transform: translateX(-220px) scale(0.9) rotateY(20deg);
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.service-card.right {
+  transform: translateX(220px) scale(0.9) rotateY(-20deg);
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.service-icon {
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  font-family: 'Neuton', serif;
+  background: #000;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.service-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* =============================
+   Responsive
+============================= */
+@media (max-width: 768px) {
+  .service-card {
+    width: 90%;
+    left: 5%;
+    margin-left: 0;
+    transform: none !important;
+    opacity: 1 !important;
+    position: static;
+    margin-bottom: 25px;
+  }
+
+  .services-carousel {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* =============================
+   Section Base Styles
+============================= */
+.section {
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.section h2 {
+  margin-bottom: 10px;
+}
+
+.about-box, .contact-form, .testimonial {
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+}
+
+.testimonial-bar {
+  background: #7b0091;
+  height: 80%;
+  width: 4px;
+  position: absolute;
+  left: 0;
+  top: 10px;
+  border-radius: 2px;
+}
+
+.testimonial {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.contact-btn {
+  background: linear-gradient(45deg, #ff0080, #7928ca);
+  color: #fff;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-btn:hover {
+  box-shadow: 0 0 18px #910091;
+}
+
+/* =============================
+   Footer
+============================= */
+footer {
+  background: #222;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 18px;
+  font-size: 14px;
+}
+
+.footer-links a, .social-icons a {
+  color: #f2f2f2;
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.footer-links a:hover, .social-icons a:hover {
+  color: #ee0979;
+}
+
+/* =============================
+   AOS Animation Defaults
+============================= */
+[data-aos] {
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
 }
